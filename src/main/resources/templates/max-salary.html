@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách khách hàng tiềm năng</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h2>Danh sách khách hàng tiềm năng</h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Tên khách hàng</th>
+      <th>Ngày sinh</th>
+      <th>Email</th>
+      <th>Ngày lấy bằng</th>
+      <th>Ghi chú</th>
+      <th>Lương</th>
+      <th>Trạng thái</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="person:${persons}">
+      <td th:text="${person.getName()}"></td>
+      <td th:text="${#temporals.format(person.getBorn(), 'yyyy-MM-dd')}"></td>
+      <td th:text="${person.getEmail()}"></td>
+      <td th:text="${#temporals.format(person.getGraduated(), 'yyyy-MM-dd')}"></td>
+      <td th:text="${person.getNote()}"></td>
+      <td th:text="${#strings.toString(person.getSalary())}"></td>
+      <td>
+        <span style="color: dodgerblue" th:if="${person.getStatus()==1}" th:text="ACTIVATED"></span>
+        <span style="color: sandybrown" th:if="${person.getStatus()==2}" th:text="TERMINATED"></span>
+      </td>
+      <td>
+        <a class="btn btn-success">Gửi mail mời</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách xe sở hữu</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>Thông tin cá nhân</h2>
+    <div style="border: 1px solid black; border-radius: 10px; padding: 20px; margin-bottom: 20px">
+        <h3 th:text="${person.getName()}"></h3>
+<!--        <h5 th:text="${'Ngày sinh: '+ #temporals.format(person.getBorn(),'yyyy-MM-dd')}"></h5>-->
+        <h5>Ngày sinh: <span style="color: gray; font-weight:normal" th:text="${#temporals.format(person.getBorn(),'yyyy-MM-dd')}"> </span></h5>
+        <h5>Email: <span style="color: gray; font-weight:normal" th:text="${person.getEmail()}"> </span></h5>
+        <h5>Ngày lấy bằng: <span style="color: gray; font-weight:normal" th:text="${#temporals.format(person.getGraduated(),'yyyy-MM-dd')}"> </span></h5>
+        <h5>Ghi chú: <span style="color: gray; font-weight:normal" th:text="${person.getNote()}"> </span></h5>
+        <h5>Lương: <span style="color: gray; font-weight:normal" th:text="${#strings.toString(person.getSalary())}"> </span></h5>
+    </div>
+    <h2>Danh sách xe sở hữu</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Hãng xe</th>
+            <th>Màu xe</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="car:${cars}">
+            <td th:text="${car.getBrand()}"></td>
+            <td>
+                <span style="color: darkgray; font-weight: bold" th:if="${car.getColor()==0}" th:text="'GRAY'"></span>
+                <span style="color: black; font-weight: bold" th:if="${car.getColor()==1}" th:text="'BLACK'"></span>
+                <span style="color: red; font-weight: bold" th:if="${car.getColor()==2}" th:text="'RED'"></span>
+                <span style="color: lightgrey; font-weight: bold" th:if="${car.getColor()==3}" th:text="'WHITE'"></span>
+                <span style="color: blue; font-weight: bold" th:if="${car.getColor()==4}" th:text="'BLUE'"></span>
+            </td>
+<!--            <td>-->
+<!--                <a th:href="@{'/create-car/'+${person.getPer_id()}}" class="btn btn-primary">Đăng ký xe</a>-->
+<!--            </td>-->
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{'/create-car/'+${person.getPer_id()}}" class="btn btn-primary">Đăng ký xe</a>
+    <a th:href="@{'/calc-insurance/'+${person.getPer_id()}}" class="btn btn-warning">Đăng ký bảo hiểm</a>
+
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</html>

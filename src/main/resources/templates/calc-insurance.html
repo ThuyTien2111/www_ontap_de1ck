@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng ký bảo hiểm</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>Báo giá</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Mã xe</th>
+            <th>Hãng xe</th>
+            <th>Màu xe</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="car:${cars}">
+            <td th:text="${car.getCar_id()}"></td>
+            <td th:text="${car.getBrand()}"></td>
+            <td>
+                <span style="color: darkgray; font-weight: bold" th:if="${car.getColor()==0}" th:text="'GRAY'"></span>
+                <span style="color: black; font-weight: bold" th:if="${car.getColor()==1}" th:text="'BLACK'"></span>
+                <span style="color: red; font-weight: bold" th:if="${car.getColor()==2}" th:text="'RED'"></span>
+                <span style="color: lightgrey; font-weight: bold" th:if="${car.getColor()==3}" th:text="'WHITE'"></span>
+                <span style="color: blue; font-weight: bold" th:if="${car.getColor()==4}" th:text="'BLUE'"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h6 style="font-weight: bold" >
+        Tổng tiền:
+        <span style="font-weight: normal" th:text="${#strings.toString(insurance)}+' x '+${#strings.toString(totalCars)} +' (xe) = '+ ${#strings.toString(total)}"></span>
+    </h6>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</html>
